@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ulangan Harian PAI 8 Bab 1 & 2 - Bu Syahrurohmah, S.Ag</title>
+    <style>
+        /* ==========================================================================
+           RESET & BASE STYLES (Mobile-First UI)
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-touch-callout: none; /* Disable long press / selection callout */
+            -webkit-user-select: none;   /* Disable selection */
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.5;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header UI */
+        .app-header {
+            text-align: center;
+            border-bottom: 2px solid #eef2f5;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .app-header h1 {
+            font-size: 1.25rem;
+            color: #1b5e20;
+            margin-bottom: 4px;
+        }
+
+        .app-header p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Warning Badge Anti-Curang */
+        .warning-badge {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #444;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #2e7d32;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2e7d32;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn:active {
+            background-color: #1b5e20;
+        }
+
+        .btn:disabled {
+            background-color: #a5d6a7;
+            cursor: not-allowed;
+        }
+
+        /* Screen Display Toggle */
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Quiz UI Elements */
+        .quiz-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .question-card {
+            background-color: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+
+        .question-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 12px;
+            word-wrap: break-word;
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', 'Traditional Arabic', serif;
+            font-size: 1.25rem;
+            direction: rtl;
+            text-align: right;
+            display: block;
+            margin: 8px 0;
+            line-height: 1.8;
+            color: #000;
+        }
+
+        .options-list {
+            list-style: none;
+        }
+
+        .option-item {
+            margin-bottom: 8px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            background: #ffffff;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .option-label input[type="radio"],
+        .option-label input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.1);
+            accent-color: #2e7d32;
+        }
+
+        .option-label:has(input:checked) {
+            background-color: #e8f5e9;
+            border-color: #2e7d32;
+            font-weight: 600;
+        }
+
+        /* Results Screen UI */
+        .result-card {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .result-badge {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 10px 0;
+        }
+
+        .result-info {
+            background-color: #f1f8e9;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .result-info p {
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .status-msg {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header Aplikasi -->
+    <div class="app-header">
+        <h1>Ulangan Harian PAI 8</h1>
+        <p>Bab 1 & 2 • Pengampu: Bu Syahrurohmah, S.Ag</p>
+    </div>
+
+    <!-- 1. LAYAR AWAL (REGISTRASI SISWA) -->
+    <div id="screen-start" class="screen active">
+        <div class="warning-badge">
+            🔒 Mode Ujian Sistem Anti-Curang Aktif
+        </div>
+        <form id="form-identity">
+            <div class="form-group">
+                <label for="input-nama">Nama Lengkap</label>
+                <input type="text" id="input-nama" placeholder="Masukkan nama siswa..." required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="input-kelas">Kelas</label>
+                <select id="input-kelas" required>
+                    <option value="">-- Pilih Kelas --</option>
+                    <option value="8-A">8-A</option>
+                    <option value="8-B">8-B</option>
+                    <option value="8-C">8-C</option>
+                    <option value="8-D">8-D</option>
+                    <option value="8-E">8-E</option>
+                    <option value="8-F">8-F</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Mulai Kerjakan Ujian</button>
+        </form>
+    </div>
+
+    <!-- 2. LAYAR KUIS (SOAL ULANGAN) -->
+    <div id="screen-quiz" class="screen">
+        <div class="warning-badge" id="violation-badge">
+            Sisa Pelanggaran Saklar Tab: 2/2
+        </div>
+        <div class="quiz-progress">
+            <span id="quiz-counter">Soal 1 dari 15</span>
+            <span id="timer-display">🕒 00:00</span>
+        </div>
+
+        <div id="quiz-container">
+            <!-- Render Soal via JS -->
+        </div>
+
+        <button id="btn-next" class="btn" onclick="nextQuestion()">Lanjut Soal Berikutnya</button>
+    </div>
+
+    <!-- 3. LAYAR SELESAI (HASIL & NILAI) -->
+    <div id="screen-result" class="screen">
+        <div class="result-card">
+            <h2>Ujian Selesai!</h2>
+            <p style="font-size:0.85rem; color:#666;">Data jawaban berhasil direkam ke sistem.</p>
+            
+            <div class="result-badge" id="display-score">0</div>
+            
+            <div class="result-info">
+                <p><strong>Nama:</strong> <span id="res-nama">-</span></p>
+                <p><strong>Kelas:</strong> <span id="res-kelas">-</span></p>
+                <p><strong>Total Nilai:</strong> <span id="res-score-detail">0 / 100</span></p>
+                <p><strong>Catatan Pelanggaran:</strong> <span id="res-violation">0 Kali</span></p>
+            </div>
+
+            <p class="status-msg" id="sync-status">Mengirimkan nilai ke Google Sheets...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ==========================================================================
+       CONFIG & GLOBAL VARIABLES
+       ========================================================================== */
+    // URL Google Apps Script Web App (Ganti dengan Web App URL Anda setelah Publish)
+    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwLFgZdCAr9Q1dVgB_un8zrnnpr8F66tQBvvToCOHLX0SmIOMfcZ9waUEzPpsQWjDh_wg/exec";
+
+    // Bank Soal Ulangan Harian PAI Bab 1 & 2 (Bu Syahrurohmah, S.Ag)
+    const quizData = [
+        {
+            type: "single",
+            question: "Terjemahan yang tepat dari ayat berikut ini adalah:<br><span class='arabic-text'>فَمَن يَكْفُرْ بِالطَّغُوتِ وَيُؤْمِنُ بِاللَّهِ فَقَدِ اسْتَمْسَكَ بِالْعُرْوَةِ الْوُثْقَى</span>",
+            options: [
+                "Allah Maha Mendengar lagi Maha Mengetahui.",
+                "Siapa yang ingkar kepada tagut dan beriman kepada Allah sungguh telah berpegang teguh pada tali yang sangat kuat",
+                "Sungguh, telah jelas jalan yang benar dari jalan yang sesat.",
+                "Tidak ada paksaan dalam (menganut) agama (Islam)"
+            ],
+            answer: 1
+        },
+        {
+            type: "single",
+            question: "Berikut ini adalah contoh hukum bacaan ....<br><span class='arabic-text'>لَا انْفِصَامَ لَهَا</span>",
+            options: [
+                "Ikhfa Hakiki",
+                "Idgham bigunnah",
+                "iqlab",
+                "Izhar halqy"
+            ],
+            answer: 0
+        },
+        {
+            type: "single",
+            question: "Huruf izhar ada 6, berikut ini adalah huruf-huruf izhar halqi yang benar ...",
+            options: [
+                "Ya (ي), Ha (ح), Kho (خ), Mim (م)",
+                "'Ain (ع), Ghain (غ), Mim (م), Nun (ن), Hamzah (ء)",
+                "Hamzah (ء), 'Ain (ع), Ghain (غ), Ha (ح), Kho (خ), Ha (هـ)",
+                "Ya (ي), Waw (و), Nun (ن), Mim (م)"
+            ],
+            answer: 2
+        },
+        {
+            type: "single",
+            question: "Islam mengajarkan toleransi karena realitas memberi bukti bahwa setiap manusia memiliki perbedaan. Pernyataan yang <strong>TIDAK</strong> menggambarkan toleransi adalah ...",
+            options: [
+                "mengikuti upacara keagamaan teman yang berbeda agama",
+                "membiarkan orang lain memeluk agama yang berbeda.",
+                "menghormati teman kristiani yang sedang merayakan perayaan Natal",
+                "menerima kenyataan adanya agama yang bermacam-macam"
+            ],
+            answer: 0
+        },
+        {
+            type: "single",
+            question: "Perhatikan pernyataan berikut!<br>1) Hurufnya Ya', Nun, Mim, dan Wau<br>2) Hurufnya Lam dan Ra'<br>3) Dibaca dengan meleburkan Nun<br>4) Disertai gunnah<br>5) Tanpa gunnah<br><br>Pernyataan yang mendefinisikan idgham bigunnah adalah ...",
+            options: [
+                "2, 3, dan 5",
+                "2, 3, dan 4",
+                "1, 3, dan 5",
+                "1, 3, dan 4"
+            ],
+            answer: 3
+        },
+        {
+            type: "single",
+            question: "Seorang muslim dilarang bekerja sama dengan non-muslim yang berkaitan dengan ...",
+            options: [
+                "membangun jalan",
+                "Ibadah",
+                "Jual beli",
+                "gotong royong"
+            ],
+            answer: 1
+        },
+        {
+            type: "single",
+            question: "Penerapan toleransi dalam masyarakat yang beragam, baik agama, kebudayaan, dan bahasa akan menimbulkan ...",
+            options: [
+                "kekacauan dan ketidaktenteraman dalam kehidupan",
+                "ketenteraman dan kerukunan",
+                "perselisihan antar anggota masyarakat",
+                "keteraturan dan sikap ingin menang sendiri"
+            ],
+            answer: 1
+        },
+        {
+            type: "single",
+            question: "Nama lain dari istilah toleransi yang sudah populer di dalam ajaran Islam adalah ...",
+            options: [
+                "tawasut",
+                "tasamuh",
+                "ta'aruf",
+                "tawasul"
+            ],
+            answer: 1
+        },
+        {
+            type: "single",
+            question: "Di bawah ini yang termasuk huruf idgham bighunnah adalah ...",
+            options: [
+                "ي ن م و",
+                "ي ن ف و",
+                "ي م ك ن",
+                "ك ل م ن"
+            ],
+            answer: 0
+        },
+        {
+            type: "single",
+            question: "Di bawah ini termasuk contoh bacaan idgham bighunnah adalah ...",
+            options: [
+                "َوْيٌل َيْوَمِئٍذ - ِمْن َمَسٍد",
+                "ِمْن ِرْزٍق",
+                "ِمْن َخْيٍر - ُكُتٌب الَّنا ِعَمة",
+                "َفَمْن َيْعَمُل - ُكُتٌب ِفْيَها"
+            ],
+            answer: 0
+        },
+        {
+            type: "single",
+            question: "Perhatikan hukum-hukum bacaan berikut!<br>(1) Idzhar Halqi<br>(2) Idzhar Syafawi<br>(3) Idgham Bighunnah<br>(4) Idgham bilaghunnah<br>(5) Iqlab<br>(6) Ikhfa Haqiqi<br>(7) Ikhfa Syafawi<br><br>Yang <strong>BUKAN</strong> termasuk hukum nun sukun dan tanwin adalah ...",
+            options: [
+                "1 dan 2",
+                "2 dan 7",
+                "3 dan 5",
+                "6 dan 7"
+            ],
+            answer: 1
+        },
+        {
+            type: "single",
+            question: "Salah satu rukun iman adalah iman kepada kitab Allah, makna dari iman kepada kitab Allah adalah ....",
+            options: [
+                "Meyakini dengan sepenuh hati bahwa Allah telah mengutus para rasul-Nya untuk menyampaikan wahyu kepada umat-Nya.",
+                "Meyakini dengan sepenuh hati bahwa Allah telah menciptakan malaikat dengan semua tugas-tugasnya.",
+                "Meyakini dengan sepenuh hati bahwa kitab-kitab Allah adalah benar-benar wahyu yang diturunkan-Nya kepada rasul, tidak diragukan isinya sebagai pedoman hidup bagi umat manusia agar selamat dunia sampai akhirat",
+                "Meyakini dengan sepenuh hati bahwa hari akhir pasti terjadi"
+            ],
+            answer: 2
+        },
+        {
+            type: "single",
+            question: "Pernyataan berikut yang paling tepat menggambarkan sikap seorang muslim terhadap kitab-kitab terdahulu adalah ....",
+            options: [
+                "meyakini kebenaran kitab terdahulu dan mengambil ajaran yang sesuai dengan Al-Qur'an",
+                "mengikuti kitab terdahulu lebih utama daripada Al-Qur'an",
+                "menerima seluruh isi kitab terdahulu tanpa pengecualian",
+                "menolak semua kitab selain Al-Qur'an"
+            ],
+            answer: 0
+        },
+        {
+            type: "single",
+            question: "Hikmah beriman kepada kitab-kitab Allah bagi kehidupan seorang muslim adalah ....",
+            options: [
+                "menumbuhkan sikap fanatik berlebihan",
+                "memberikan pedoman hidup yang benar dan terarah",
+                "menjadikan hidup bebas tanpa aturan",
+                "mengabaikan perkembangan zaman"
+            ],
+            answer: 1
+        },
+        {
+            type: "single",
+            question: "Pernyataan berikut yang tepat mengenai suhuf adalah ....",
+            options: [
+                "wahyu yang sudah dibukukan secara lengkap.",
+                "kitab yang berlaku sepanjang masa",
+                "wahyu yang hanya diturunkan kepada Nabi Muhammad saw.",
+                "wahyu dalam bentuk lembaran-lembaran terpisah"
+            ],
+            answer: 3
+        },
+        {
+            type: "multiple",
+            question: "Yang termasuk karakteristik generasi Qur'ani adalah .... (Jawaban bisa lebih dari satu)",
+            options: [
+                "Mudah terpengaruh budaya negatif",
+                "Cerdas dan berkomitmen",
+                "Berakhlak mulia",
+                "Mengabaikan ajaran agama",
+                "Memiliki iman yang kuat"
+            ],
+            answer: [1, 2, 4] // Indeks jawaban benar
+        },
+        {
+            type: "single",
+            question: "Membenarkan bahwa Allah Swt. mempunyai kitab-kitab yang diturunkan kepada para rasul-Nya adalah pengertian dari ....",
+            options: [
+                "Iman kepada kitab Allah",
+                "Iman kepada rasul Allah",
+                "Iman kepada Allah",
+                "Iman kepada malaikat Allah"
+            ],
+            answer: 0
+        },
+        {
+            type: "single",
+            question: "Allah Swt. menurunkan kitab-kitab kepada para rasul-Nya untuk disampaikan kepada umat manusia dengan tujuan ....",
+            options: [
+                "dibaca oleh umat manusia",
+                "dimiliki oleh umat manusia",
+                "dijadikan petunjuk hidup manusia",
+                "diambil sebagian sebagai contoh"
+            ],
+            answer: 2
+        },
+        {
+            type: "single",
+            question: "Dengan mempelajari Al-Qur'an maka akan dapat mengetahui isi pokoknya. Perhatikanlah pernyataan di bawah ini!<br>(1) Tauhid dan akidah Islam<br>(2) Ibadah dan cara mengabdi kepada Allah Swt<br>(3) Janji dan ancaman<br>(4) Menyucikan hari Sabtu<br><br>Yang <strong>BUKAN</strong> termasuk isi pokok Al-Qur'an ditunjukkan oleh nomor ....",
+            options: [
+                "(1)",
+                "(2)",
+                "(3)",
+                "(4)"
+            ],
+            answer: 3
+        },
+        {
+            type: "single",
+            question: "Hal berikut yang perlu kita percayai untuk lebih beriman terhadap kandungan Al-Qur'an sebagai pedoman hidup bagi umat Islam, <strong>KECUALI</strong> ....",
+            options: [
+                "isi Al-Qur'an banyak menggunakan penyebutan mukmin",
+                "kandungan Al-Qur'an banyak membahas sejarah kehidupan disertai perintah dan larangan untuk kepentingan hidup umat manusia",
+                "kitab Al-Qur'an adalah kitab terakhir yang turun sehingga ajaran-ajarannya lebih sempurna",
+                "Al-Qur'an berisi firman Allah yang disampaikan melalui para nabi"
+            ],
+            answer: 0
+        }
+    ];
+
+    // State Aplikasi
+    let studentData = { nama: "", kelas: "" };
+    let currentQuestionIndex = 0;
+    let userAnswers = {};
+    let violations = 0;
+    const MAX_VIOLATIONS = 2;
+    let quizSubmitted = false;
+
+    /* ==========================================================================
+       SECURITY & ANTI-CHEATING CONTROLS
+       ========================================================================== */
+    // 1. Mematikan Klik Kanan, Context Menu, Copy, Cut, Paste, & Long Press Selection
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('cut', e => e.preventDefault());
+    document.addEventListener('paste', e => e.preventDefault());
+
+    // 2. Mematikan Shortcut Inspect Element (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+    document.addEventListener('keydown', e => {
+        if (
+            e.keyCode === 123 || 
+            (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
+            (e.ctrlKey && e.keyCode === 85)
+        ) {
+            e.preventDefault();
+        }
+    });
+
+    // 3. Deteksi Pindah Tab / Buka Aplikasi Lain (visibilitychange)
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && !quizSubmitted && currentQuestionIndex >= 0) {
+            handleViolation("Meninggalkan tab/layar ujian");
+        }
+    });
+
+    // 4. Deteksi Tombol Back Mobile (popstate)
+    window.addEventListener('popstate', () => {
+        if (!quizSubmitted) {
+            history.pushState(null, "", location.href);
+            handleViolation("Menekan tombol kembali (Back)");
+        }
+    });
+
+    function handleViolation(reason) {
+        violations++;
+        const remaining = MAX_VIOLATIONS - violations;
+        
+        if (violations >= MAX_VIOLATIONS) {
+            alert(`PERINGATAN SISWA!\nAnda terdeteksi ${reason}.\nBatas maksimal pelanggaran tercapai (${violations}/${MAX_VIOLATIONS}). Jawaban Anda akan otomatis terkirim sekarang!`);
+            finishQuiz();
+        } else {
+            alert(`PERINGATAN SISTEM ANTI-CURANG!\nTerdeteksi: ${reason}.\nSisa kesempatan pelanggaran: ${remaining}x lagi sebelum ujian otomatis dihentikan!`);
+            const badge = document.getElementById('violation-badge');
+            if (badge) badge.innerText = `Sisa Pelanggaran Saklar Tab: ${remaining}/${MAX_VIOLATIONS}`;
+        }
+    }
+
+    // Fullscreen Mode Trigger
+    function requestFullscreen() {
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen().catch(() => {});
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+        }
+    }
+
+    /* ==========================================================================
+       QUIZ LOGIC & NAVIGATION
+       ========================================================================== */
+    document.getElementById('form-identity').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        studentData.nama = document.getElementById('input-nama').value.trim();
+        studentData.kelas = document.getElementById('input-kelas').value;
+
+        if (!studentData.nama || !studentData.kelas) {
+            alert("Harap isi Nama dan Pilih Kelas terlebih dahulu!");
+            return;
+        }
+
+        // Aktifkan Fullscreen dan cegah Tombol Back
+        requestFullscreen();
+        history.pushState(null, "", location.href);
+
+        // Pindah Layar
+        document.getElementById('screen-start').classList.remove('active');
+        document.getElementById('screen-quiz').classList.add('active');
+
+        renderQuestion();
+    });
+
+    function renderQuestion() {
+        const q = quizData[currentQuestionIndex];
+        const container = document.getElementById('quiz-container');
+        document.getElementById('quiz-counter').innerText = `Soal ${currentQuestionIndex + 1} dari ${quizData.length}`;
+
+        let html = `
+            <div class="question-card">
+                <div class="question-text">${q.question}</div>
+                <ul class="options-list">
+        `;
+
+        q.options.forEach((opt, idx) => {
+            const inputType = q.type === "multiple" ? "checkbox" : "radio";
+            const inputName = `question_${currentQuestionIndex}`;
+            
+            // Cek status jawaban tersimpan
+            let isChecked = false;
+            if (userAnswers[currentQuestionIndex] !== undefined) {
+                if (q.type === "multiple") {
+                    isChecked = userAnswers[currentQuestionIndex].includes(idx);
+                } else {
+                    isChecked = userAnswers[currentQuestionIndex] === idx;
+                }
+            }
+
+            html += `
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="${inputType}" name="${inputName}" value="${idx}" ${isChecked ? 'checked' : ''} onchange="saveAnswer()">
+                        <span>${opt}</span>
+                    </label>
+                </li>
+            `;
+        });
+
+        html += `</ul></div>`;
+        container.innerHTML = html;
+
+        // Ubah teks tombol pada soal terakhir
+        const btnNext = document.getElementById('btn-next');
+        if (currentQuestionIndex === quizData.length - 1) {
+            btnNext.innerText = "Selesaikan & Kirim Ujian";
+        } else {
+            btnNext.innerText = "Lanjut Soal Berikutnya";
+        }
+    }
+
+    function saveAnswer() {
+        const q = quizData[currentQuestionIndex];
+        if (q.type === "multiple") {
+            const checkedBoxes = document.querySelectorAll(`input[name="question_${currentQuestionIndex}"]:checked`);
+            userAnswers[currentQuestionIndex] = Array.from(checkedBoxes).map(cb => parseInt(cb.value));
+        } else {
+            const checkedRadio = document.querySelector(`input[name="question_${currentQuestionIndex}"]:checked`);
+            if (checkedRadio) {
+                userAnswers[currentQuestionIndex] = parseInt(checkedRadio.value);
+            }
+        }
+    }
+
+    function nextQuestion() {
+        saveAnswer();
+        if (currentQuestionIndex < quizData.length - 1) {
+            currentQuestionIndex++;
+            renderQuestion();
+        } else {
+            if (confirm("Apakah Anda yakin ingin menyelesaikan dan mengirim ujian ini?")) {
+                finishQuiz();
+            }
+        }
+    }
+
+    /* ==========================================================================
+       AUTO-GRADING & SUBMISSION
+       ========================================================================== */
+    function calculateScore() {
+        let correctCount = 0;
+        const totalQuestions = quizData.length;
+
+        quizData.forEach((q, idx) => {
+            const userAns = userAnswers[idx];
+            if (userAns !== undefined) {
+                if (q.type === "single") {
+                    if (userAns === q.answer) correctCount++;
+                } else if (q.type === "multiple") {
+                    // Cek ketersamaan array pilihan ganda kompleks
+                    const isArrayEqual = Array.isArray(userAns) && 
+                        userAns.length === q.answer.length && 
+                        userAns.every(val => q.answer.includes(val));
+                    if (isArrayEqual) correctCount++;
+                }
+            }
+        });
+
+        return Math.round((correctCount / totalQuestions) * 100);
+    }
+
+    function finishQuiz() {
+        quizSubmitted = true;
+        const finalScore = calculateScore();
+
+        // Pindah ke Layar Hasil
+        document.getElementById('screen-quiz').classList.remove('active');
+        document.getElementById('screen-result').classList.add('active');
+
+        // Tampilkan Identitas & Nilai pada Layar Akhir
+        document.getElementById('display-score').innerText = finalScore;
+        document.getElementById('res-nama').innerText = studentData.nama;
+        document.getElementById('res-kelas').innerText = studentData.kelas;
+        document.getElementById('res-score-detail').innerText = `${finalScore} / 100`;
+        document.getElementById('res-violation').innerText = `${violations} Kali`;
+
+        // Payload Kirim Data
+        const payload = {
+            timestamp: new Date().toLocaleString("id-ID"),
+            nama: studentData.nama,
+            kelas: studentData.kelas,
+            nilai: finalScore,
+            pelanggaran: violations,
+            detailJawaban: JSON.stringify(userAnswers)
+        };
+
+        sendDataToGAS(payload);
+    }
+
+    function sendDataToGAS(data) {
+        const syncStatus = document.getElementById('sync-status');
+        
+        if (!GAS_WEB_APP_URL || GAS_WEB_APP_URL.includes("AKfycbx...")) {
+            syncStatus.innerText = "⚠️ Catatan: URL Apps Script belum dikonfigurasi.";
+            syncStatus.style.color = "#d32f2f";
+            return;
+        }
+
+        fetch(GAS_WEB_APP_URL, {
+            method: "POST",
+            mode: "no-cors", // Penanganan CORS standar Apps Script
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            syncStatus.innerText = "✅ Data nilai berhasil tersimpan di Google Sheets!";
+            syncStatus.style.color = "#2e7d32";
+        })
+        .catch(err => {
+            console.error("Error sending data:", err);
+            syncStatus.innerText = "❌ Gagal mengirimkan data otomatis. Periksa koneksi internet.";
+            syncStatus.style.color = "#d32f2f";
+        });
+    }
+</script>
+</body>
+</html>
